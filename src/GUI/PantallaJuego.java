@@ -15,7 +15,7 @@ public class PantallaJuego extends JFrame {
         this.juego = juego;
         configurarVentana(modo);
         inicializarComponentes();
-        actualizarPantalla(); // Esto pone los "____" desde el segundo 1
+        actualizarPantalla(); 
     }
 
     private void configurarVentana(String modo) {
@@ -28,7 +28,7 @@ public class PantallaJuego extends JFrame {
     }
 
     private void inicializarComponentes() {
-        // Figura del Ahorcado (ASCII)
+     
         areaAhorcado = new JTextArea();
         areaAhorcado.setBounds(150, 20, 200, 150);
         areaAhorcado.setEditable(false);
@@ -37,34 +37,34 @@ public class PantallaJuego extends JFrame {
         areaAhorcado.setFont(new Font("Monospaced", Font.BOLD, 16));
         add(areaAhorcado);
 
-        // Palabra Secreta (Los guiones ____)
+  
         lblPalabra = new JLabel("", SwingConstants.CENTER);
         lblPalabra.setBounds(50, 200, 400, 40);
         lblPalabra.setFont(new Font("Monospaced", Font.BOLD, 30));
         lblPalabra.setForeground(Color.WHITE);
         add(lblPalabra);
 
-        // Intentos restantes
+
         lblIntentos = new JLabel("Intentos: 6");
         lblIntentos.setBounds(50, 260, 200, 30);
         lblIntentos.setForeground(new Color(231, 76, 60));
         lblIntentos.setFont(new Font("Segoe UI", Font.BOLD, 18));
         add(lblIntentos);
 
-        // Letras usadas
+    
         lblLetrasUsadas = new JLabel("Letras: ");
         lblLetrasUsadas.setBounds(50, 300, 400, 30);
         lblLetrasUsadas.setForeground(Color.LIGHT_GRAY);
         add(lblLetrasUsadas);
 
-        // Entrada de texto
+
         txtEntrada = new JTextField();
         txtEntrada.setBounds(150, 350, 50, 40);
         txtEntrada.setFont(new Font("Segoe UI", Font.BOLD, 20));
         txtEntrada.setHorizontalAlignment(JTextField.CENTER);
         add(txtEntrada);
 
-        // Botón Adivinar
+
         btnAdivinar = new JButton("ADIVINAR");
         btnAdivinar.setBounds(210, 350, 120, 40);
         btnAdivinar.setBackground(new Color(41, 128, 185));
@@ -72,7 +72,7 @@ public class PantallaJuego extends JFrame {
         btnAdivinar.addActionListener(e -> procesarIntento());
         add(btnAdivinar);
         
-        // Permitir usar "Enter" para adivinar
+       
         getRootPane().setDefaultButton(btnAdivinar);
     }
 
@@ -81,7 +81,7 @@ public class PantallaJuego extends JFrame {
         if (texto.isEmpty()) return;
 
         char letra = texto.charAt(0);
-        juego.jugar(letra); // Llama a tu lógica de JuegoAhorcadoFijo/Azar
+        juego.jugar(letra); 
         
         actualizarPantalla();
         txtEntrada.setText("");
@@ -91,7 +91,7 @@ public class PantallaJuego extends JFrame {
     }
 
     private void actualizarPantalla() {
-        lblPalabra.setText(juego.getPalabraActual()); // Muestra _ _ _ _
+        lblPalabra.setText(juego.getPalabraActual()); 
         lblIntentos.setText("Intentos: " + juego.getIntentos());
         lblLetrasUsadas.setText("Letras usadas: " + juego.getLetrasUsadascomoTexto());
         areaAhorcado.setText(juego.getFiguraActual());
