@@ -18,7 +18,7 @@ public class JuegoAhorcadoFijo extends JuegoAhorcadoBase {
         super();
         this.palabraSecreta=palabra.toLowerCase();
         figuraAhorcado.add(
-                "  +---+\n"
+                  "  +---+\n"
                 + "  |   |\n"
                 + "      |\n"
                 + "      |\n"
@@ -27,7 +27,7 @@ public class JuegoAhorcadoFijo extends JuegoAhorcadoBase {
                 + "========="
         );
         figuraAhorcado.add(
-                "  +---+\n"
+                  "+---+  \n"
                 + "  |   |\n"
                 + "  O   |\n"
                 + "      |\n"
@@ -36,7 +36,7 @@ public class JuegoAhorcadoFijo extends JuegoAhorcadoBase {
                 + "========="
         );
         figuraAhorcado.add(
-                "  +---+\n"
+                  "  +---+\n"
                 + "  |   |\n"
                 + "  O   |\n"
                 + "  |   |\n"
@@ -45,7 +45,7 @@ public class JuegoAhorcadoFijo extends JuegoAhorcadoBase {
                 + "========="
         );
         figuraAhorcado.add(
-                "  +---+\n"
+                  "  +---+\n"
                 + "  |   |\n"
                 + "  O   |\n"
                 + " /|   |\n"
@@ -54,7 +54,7 @@ public class JuegoAhorcadoFijo extends JuegoAhorcadoBase {
                 + "========="
         );
         figuraAhorcado.add(
-                "  +---+\n"
+                  "  +---+\n"
                 + "  |   |\n"
                 + "  O   |\n"
                 + " /|\\ |\n"
@@ -63,7 +63,7 @@ public class JuegoAhorcadoFijo extends JuegoAhorcadoBase {
                 + "========="
         );
         figuraAhorcado.add(
-                "  +---+\n"
+                  "  +---+\n"
                 + "  |   |\n"
                 + "  O   |\n"
                 + " /|\\ |\n"
@@ -72,7 +72,7 @@ public class JuegoAhorcadoFijo extends JuegoAhorcadoBase {
                 + "========="
         );
         figuraAhorcado.add(
-                "  +---+\n"
+                  "  +---+\n"
                 + "  |   |\n"
                 + "  O   |\n"
                 + " /|\\ |\n"
