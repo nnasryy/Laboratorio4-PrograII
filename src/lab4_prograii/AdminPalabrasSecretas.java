@@ -17,7 +17,7 @@ public class AdminPalabrasSecretas {
 
     public AdminPalabrasSecretas() {
         this.listaDePalabras=new ArrayList<>();
-        this.randomizar = randomizar;
+        this.randomizar = new Random();
     }
     
     public boolean agregarPalabra(String palabra){
