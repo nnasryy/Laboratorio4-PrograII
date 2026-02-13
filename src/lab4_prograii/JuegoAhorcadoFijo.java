@@ -6,6 +6,7 @@
 package lab4_prograii;
 
 
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 /**
  *
@@ -102,8 +103,8 @@ public class JuegoAhorcadoFijo extends JuegoAhorcadoBase {
             if(palabraSecreta.indexOf(letra)>=0){
                 return true;
             } else{
+                JOptionPane.showMessageDialog(null, "Prediccion incorrecta");
                 intentos--;
-                actualizarFigura();
                 return false;
             }
     }
@@ -120,14 +121,33 @@ public class JuegoAhorcadoFijo extends JuegoAhorcadoBase {
         }
         palabraActual=nuevaPalabra; 
     }
-    
+
+    public String getPalabraSecreta() {
+        return palabraSecreta;
+    }
+
+    public String getPalabraActual() {
+        return palabraActual;
+    }
+
+    public int getIntentos() {
+        return intentos;
+    }
+
+    public ArrayList<Character> getLetrasUsadas() {
+        return letrasUsadas;
+    }
+
+    public ArrayList<String> getFiguraAhorcado() {
+        return figuraAhorcado;
+    }
     
     @Override
     public boolean hasGanado(){
         return palabraActual.equals(palabraSecreta);
     }
     
-    private void actualizarFigura(){
+    public void actualizarFigura(){
         int indice=limiteIntentos-intentos-1;
         if(indice>=0 && indice<figuraAhorcado.size()){
             String parte=figuraAhorcado.get(indice);
@@ -145,8 +165,6 @@ public class JuegoAhorcadoFijo extends JuegoAhorcadoBase {
             if(verificarLetra(letra)){
                 JOptionPane.showMessageDialog(null, "Prediccion correcta");
                 actualizarPalabraActual(letra);
-            }else{
-                JOptionPane.showMessageDialog(null, "Prediccion incorrecta");
             }
         } catch (Exception e){
             JOptionPane.showMessageDialog(null, e.getMessage(), "Error de entrada", JOptionPane.ERROR_MESSAGE);
