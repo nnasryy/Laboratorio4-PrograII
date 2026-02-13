@@ -5,6 +5,8 @@
  */
 package lab4_prograii;
 
+
+import javax.swing.JOptionPane;
 /**
  *
  * @author Fabio Sierra
@@ -12,29 +14,46 @@ package lab4_prograii;
 public class JuegoAhorcadoFijo extends JuegoAhorcadoBase {
     
     public JuegoAhorcadoFijo(String palabraSecreta){
-        super(palabraSecreta);
         inicializarPalabraSecreta();
     }
     
-
-    public void iniciarPalabraSecreta(){
+    @Override
+    public void inicializarPalabraSecreta(){
         this.palabraActual="";
         for(int contador=0;contador<palabraSecreta.length();contador++){
-            
+            this.palabraActual=palabraActual+"_ ";
         }
     }
     
-    
-    public void verificarLetra(){
-        
+    @Override
+    public void verificarLetra(char letra){
+        try{
+            letra=Character.toLowerCase(letra);
+            if(!Character.isLetter(letra)){
+                throw new Exception("Favor ingresar una letra valida.");
+            }
+            if(letrasUsadas.contains(letra)){
+                JOptionPane.showMessageDialog(null, "La letra: " +letra+ " ya fue usada.");
+            }
+            letrasUsadas.add(letra);
+            
+            if(palabraSecreta.indexOf(letra)>=0){
+                actualizarPalabraActual(letra);
+            } else{
+                intentos--;
+            }
+        } catch (Exception e){
+            JOptionPane.showMessageDialog(null, e.getMessage(), "Error de entrada", JOptionPane.ERROR_MESSAGE);
+        }
     }
     
     @Override
     public boolean hasGanado(){
-        
+        return palabraActual.equals(palabraSecreta);
     }
     
-    public void actualizarPalabraActual(){
+    @Override
+    public void actualizarPalabraActual(char letra){
         String nuevaPalabra="";
         for(int contador=0; contador<palabraSecreta.length(); contador++){
            if(palabraSecreta.charAt(contador)==letra){
@@ -46,23 +65,10 @@ public class JuegoAhorcadoFijo extends JuegoAhorcadoBase {
         palabraActual=nuevaPalabra; 
     }
 
-    @Override
-    public void actualizarPalabraActual(char letra) {
-        
-    }
-
-    @Override
-    public void verificarLetra(char letra) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void inicializarPalabraSecreta() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 
     @Override
     public void jugar() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        inicializarPalabraSecreta();
+        hasGanado();
     }
 }
