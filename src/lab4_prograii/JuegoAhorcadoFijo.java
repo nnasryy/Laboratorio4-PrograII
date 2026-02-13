@@ -127,19 +127,31 @@ public class JuegoAhorcadoFijo extends JuegoAhorcadoBase {
     }
 
     public String getPalabraActual() {
-        return palabraActual;
+        String resultado = "";
+        for (char c : palabraActual.toCharArray()) {
+            resultado += c + " ";
+        }
+        return resultado;
     }
 
     public int getIntentos() {
         return intentos;
     }
 
-    public ArrayList<Character> getLetrasUsadas() {
-        return letrasUsadas;
+    public String getLetrasUsadascomoTexto() {
+        String texto = "";
+        for (char c : letrasUsadas) {
+            texto += c + " ";
+        }
+        return texto;
     }
 
-    public ArrayList<String> getFiguraAhorcado() {
-        return figuraAhorcado;
+    public String getFiguraActual() {
+         int indice = limiteIntentos - intentos;
+        if (indice >= 0 && indice < figuraAhorcado.size()) {
+            return figuraAhorcado.get(indice);
+        }
+        return "";
     }
     
     @Override

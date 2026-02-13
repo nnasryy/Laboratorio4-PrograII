@@ -6,6 +6,7 @@ package lab4_prograii;
 
 import java.util.ArrayList;
 import java.util.Random;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -18,6 +19,10 @@ public class AdminPalabrasSecretas {
     public AdminPalabrasSecretas() {
         this.listaDePalabras=new ArrayList<>();
         this.randomizar = new Random();
+        this.agregarPalabra("PROGRAMACION");
+        this.agregarPalabra("HERENCIA");
+        this.agregarPalabra("ENUMS");
+        this.agregarPalabra("MEMORIA");
     }
     
     public boolean agregarPalabra(String palabra){
@@ -31,6 +36,8 @@ public class AdminPalabrasSecretas {
             listaDePalabras.add(palabraNueva);
             return true;
     }
+        
+        JOptionPane.showMessageDialog(null, "Esa palabra ya existe en la lista.");
         return false;
     }
     

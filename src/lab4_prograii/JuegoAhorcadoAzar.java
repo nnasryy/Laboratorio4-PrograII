@@ -4,6 +4,7 @@
  */
 package lab4_prograii;
 
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 /**
@@ -14,7 +15,70 @@ public class JuegoAhorcadoAzar extends JuegoAhorcadoBase{
     
     JuegoAhorcadoAzar(String palabraSecreta){
         super();
-        inicializarPalabraSecreta(palabraSecreta);
+        inicializarPalabraSecreta(palabraSecreta.toLowerCase());
+        figuraAhorcado.add(
+                "  +---+\n"
+                + "  |   |\n"
+                + "      |\n"
+                + "      |\n"
+                + "      |\n"
+                + "      |\n"
+                + "========="
+        );
+        figuraAhorcado.add(
+                "  +---+\n"
+                + "  |   |\n"
+                + "  O   |\n"
+                + "      |\n"
+                + "      |\n"
+                + "      |\n"
+                + "========="
+        );
+        figuraAhorcado.add(
+                "  +---+\n"
+                + "  |   |\n"
+                + "  O   |\n"
+                + "  |   |\n"
+                + "      |\n"
+                + "      |\n"
+                + "========="
+        );
+        figuraAhorcado.add(
+                "  +---+\n"
+                + "  |   |\n"
+                + "  O   |\n"
+                + " /|   |\n"
+                + "      |\n"
+                + "      |\n"
+                + "========="
+        );
+        figuraAhorcado.add(
+                "  +---+\n"
+                + "  |   |\n"
+                + "  O   |\n"
+                + " /|\\ |\n"
+                + "      |\n"
+                + "      |\n"
+                + "========="
+        );
+        figuraAhorcado.add(
+                "  +---+\n"
+                + "  |   |\n"
+                + "  O   |\n"
+                + " /|\\ |\n"
+                + " /    |\n"
+                + "      |\n"
+                + "========="
+        );
+        figuraAhorcado.add(
+                "  +---+\n"
+                + "  |   |\n"
+                + "  O   |\n"
+                + " /|\\ |\n"
+                + " / \\ |\n"
+                + "      |\n"
+                + "========="
+        );
     }
     
     @Override
@@ -24,6 +88,38 @@ public class JuegoAhorcadoAzar extends JuegoAhorcadoBase{
         for(int contador=0;contador<palabraSecreta.length();contador++){
             this.palabraActual=palabraActual+"_ ";
         }
+    }
+
+    public String getPalabraSecreta() {
+        return palabraSecreta;
+    }
+
+    public String getPalabraActual() {
+        String resultado = "";
+        for (char c : palabraActual.toCharArray()) {
+            resultado += c + " ";
+        }
+        return resultado;
+    }
+
+    public int getIntentos() {
+        return intentos;
+    }
+
+    public String getLetrasUsadascomoTexto() {
+        String texto = "";
+        for (char c : letrasUsadas) {
+            texto += c + " ";
+        }
+        return texto;
+    }
+
+    public String getFiguraActual() {
+         int indice = limiteIntentos - intentos;
+        if (indice >= 0 && indice < figuraAhorcado.size()) {
+            return figuraAhorcado.get(indice);
+        }
+        return "";
     }
     
     @Override
@@ -78,5 +174,10 @@ public class JuegoAhorcadoAzar extends JuegoAhorcadoBase{
         return palabraActual.equals(palabraSecreta);
     }
     
-    
+    public void actualizarFigura(){
+        int indice=limiteIntentos-intentos-1;
+        if(indice>=0 && indice<figuraAhorcado.size()){
+            String parte=figuraAhorcado.get(indice);
+        }
+    }
 }
