@@ -18,16 +18,16 @@ public abstract class JuegoAhorcadoBase implements JuegoAhorcado{
     protected ArrayList<Character> letrasUsadas;
     protected ArrayList<String> figuraAhorcado;
     
-    JuegoAhorcadoBase(String palabraSecreta){
+    JuegoAhorcadoBase(){
         limiteIntentos=6;
         intentos=6;
         figuraAhorcado= new ArrayList<>();
         letrasUsadas= new ArrayList();
         palabraActual="";
-        this.palabraSecreta=palabraSecreta;
+        palabraSecreta="";
     }
     
     public abstract void actualizarPalabraActual(char letra);
-    public abstract void verificarLetra(char letra);
+    public abstract boolean verificarLetra(char letra);
     public abstract boolean hasGanado();
 }

@@ -4,42 +4,78 @@
  */
 package lab4_prograii;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author emyca
  */
 public class JuegoAhorcadoAzar extends JuegoAhorcadoBase{
-    private String palabraSecretaAzar;
     
     JuegoAhorcadoAzar(String palabraSecreta){
         super();
-        this.palabraSecretaAzar=palabraSecreta;
-        inicializarPalabraSecreta();
+        inicializarPalabraSecreta(palabraSecreta);
     }
     
     @Override
-    public void inicializarPalabraSecreta() {
-       super.palabraSecreta=palabraSecretaAzar;
+    public void inicializarPalabraSecreta(String palabraSecreta) {
+       this.palabraSecreta=palabraSecreta;
+       palabraActual="";
+        for(int contador=0;contador<palabraSecreta.length();contador++){
+            this.palabraActual=palabraActual+"_ ";
+        }
     }
     
     @Override
-    public void jugar() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public void jugar(char letra) {
+        try{
+            letra=Character.toLowerCase(letra);
+            if(!Character.isLetter(letra)){
+                throw new Exception("Favor ingresar una letra valida.");
+            }
+            if(verificarLetra(letra)){
+                JOptionPane.showMessageDialog(null, "Prediccion correcta");
+                actualizarPalabraActual(letra);
+            }
+        } catch (Exception e){
+            JOptionPane.showMessageDialog(null, e.getMessage(), "Error de entrada", JOptionPane.ERROR_MESSAGE);
+        }
+        
     }
     
     @Override
     public void actualizarPalabraActual(char letra) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        String nuevaPalabra="";
+        for(int contador=0; contador<palabraSecreta.length(); contador++){
+           if(palabraSecreta.charAt(contador)==letra){
+               nuevaPalabra=nuevaPalabra+letra;
+           } else{
+               nuevaPalabra=nuevaPalabra+palabraActual.charAt(contador);
+           }
+        }
+        palabraActual=nuevaPalabra; 
     }
 
     @Override
-    public void verificarLetra(char letra) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public boolean verificarLetra(char letra) {
+            if(letrasUsadas.contains(letra)){
+                JOptionPane.showMessageDialog(null, "La letra: " +letra+ " ya fue usada.");
+                return false;
+            }
+            letrasUsadas.add(letra);
+            
+            if(palabraSecreta.indexOf(letra)>=0){
+                return true;
+            } else{
+                JOptionPane.showMessageDialog(null, "Prediccion incorrecta");
+                intentos--;
+                return false;
+            }
     }
 
     @Override
     public boolean hasGanado() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return palabraActual.equals(palabraSecreta);
     }
     
     
