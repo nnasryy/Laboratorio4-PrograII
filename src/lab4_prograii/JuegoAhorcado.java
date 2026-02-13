@@ -9,6 +9,6 @@ package lab4_prograii;
  * @author emyca
  */
 public interface JuegoAhorcado {
-    void inicializarPalabraSecreta();
-    void jugar();
+    void inicializarPalabraSecreta(String palabraSecreta);
+    void jugar(char letra);
 }
