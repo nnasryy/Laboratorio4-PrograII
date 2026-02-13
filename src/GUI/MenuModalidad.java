@@ -13,11 +13,7 @@ public class MenuModalidad extends JFrame {
 
     public MenuModalidad() {
         adminPalabras = new AdminPalabrasSecretas();
-        // Agregamos algunas palabras por defecto si el admin está vacío
-        adminPalabras.agregarPalabra("JAVA");
-        adminPalabras.agregarPalabra("PROGRAMACION");
-        adminPalabras.agregarPalabra("INTERFAZ");
-        
+
         configurarVentana();
         inicializarComponentes();
         setVisible(true);
@@ -28,7 +24,7 @@ public class MenuModalidad extends JFrame {
         setSize(600, 400);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLayout(null);
-        getContentPane().setBackground(new Color(25, 25, 25)); // Fondo un poco más oscuro
+        getContentPane().setBackground(new Color(25, 25, 25)); 
         setLocationRelativeTo(null);
         setResizable(false);
     }
@@ -46,7 +42,7 @@ public class MenuModalidad extends JFrame {
         lblSeleccionar.setFont(new Font("Segoe UI", Font.ITALIC, 18));
         add(lblSeleccionar);
 
-        // Botón Modo Fijo
+
         btnFijo = new JButton("MODO FIJO");
         btnFijo.setBounds(70, 200, 140, 50);
         estilizarBoton(btnFijo, new Color(41, 128, 185));
@@ -55,7 +51,7 @@ public class MenuModalidad extends JFrame {
             abrirPantallaJuego(juego, "Fijo");
         });
 
-        // Botón Modo Azar
+
         btnAzar = new JButton("MODO AZAR");
         btnAzar.setBounds(230, 200, 140, 50);
         estilizarBoton(btnAzar, new Color(39, 174, 96));
@@ -69,7 +65,7 @@ public class MenuModalidad extends JFrame {
             }
         });
 
-        // Botón Salir
+
         btnSalir = new JButton("SALIR");
         btnSalir.setBounds(390, 200, 140, 50);
         estilizarBoton(btnSalir, new Color(192, 57, 43));
