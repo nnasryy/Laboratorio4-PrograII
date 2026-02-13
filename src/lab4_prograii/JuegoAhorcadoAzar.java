@@ -13,7 +13,7 @@ import javax.swing.JOptionPane;
  */
 public class JuegoAhorcadoAzar extends JuegoAhorcadoBase{
     
-    JuegoAhorcadoAzar(String palabraSecreta){
+    public JuegoAhorcadoAzar(String palabraSecreta){
         super();
         inicializarPalabraSecreta(palabraSecreta.toLowerCase());
         figuraAhorcado.add(
