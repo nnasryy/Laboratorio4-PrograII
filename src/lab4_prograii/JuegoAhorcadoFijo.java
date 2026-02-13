@@ -15,7 +15,7 @@ public class JuegoAhorcadoFijo extends JuegoAhorcadoBase {
     
     public JuegoAhorcadoFijo(String palabra){
         super();
-        inicializarPalabraSecreta(palabraSecreta);
+        this.palabraSecreta=palabra.toLowerCase();
         figuraAhorcado.add(
                 "  +---+\n"
                 + "  |   |\n"
@@ -79,12 +79,13 @@ public class JuegoAhorcadoFijo extends JuegoAhorcadoBase {
                 + "      |\n"
                 + "========="
         );
-        
+        inicializarPalabraSecreta(this.palabraSecreta);
     }
     
     @Override
     public void inicializarPalabraSecreta(String palabraSecreta){
         this.palabraActual=palabraSecreta;
+        this.palabraActual="";
         for(int contador=0;contador<palabraSecreta.length();contador++){
             this.palabraActual=palabraActual+"_";
         }
@@ -94,6 +95,7 @@ public class JuegoAhorcadoFijo extends JuegoAhorcadoBase {
     public boolean verificarLetra(char letra) {
             if(letrasUsadas.contains(letra)){
                 JOptionPane.showMessageDialog(null, "La letra: " +letra+ " ya fue usada.");
+                return false;
             }
             letrasUsadas.add(letra);
             
@@ -101,6 +103,7 @@ public class JuegoAhorcadoFijo extends JuegoAhorcadoBase {
                 return true;
             } else{
                 intentos--;
+                actualizarFigura();
                 return false;
             }
     }
@@ -125,7 +128,10 @@ public class JuegoAhorcadoFijo extends JuegoAhorcadoBase {
     }
     
     private void actualizarFigura(){
-        
+        int indice=limiteIntentos-intentos-1;
+        if(indice>=0 && indice<figuraAhorcado.size()){
+            String parte=figuraAhorcado.get(indice);
+        }
     }
 
 
