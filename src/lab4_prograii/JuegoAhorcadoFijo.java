@@ -167,20 +167,17 @@ public class JuegoAhorcadoFijo extends JuegoAhorcadoBase {
     }
 
 
+    
     @Override
     public void jugar(char letra) {
-        try{
-            letra=Character.toLowerCase(letra);
-            if(!Character.isLetter(letra)){
-                throw new Exception("Favor ingresar una letra valida.");
-            }
-            if(verificarLetra(letra)){
-                JOptionPane.showMessageDialog(null, "Prediccion correcta");
-                actualizarPalabraActual(letra);
-            }
-        } catch (Exception e){
-            JOptionPane.showMessageDialog(null, e.getMessage(), "Error de entrada", JOptionPane.ERROR_MESSAGE);
-        }
-        
+    letra = Character.toLowerCase(letra);
+
+    if (!Character.isLetter(letra)) {
+        return;
     }
+
+    if (verificarLetra(letra)) {
+        actualizarPalabraActual(letra);
+    }
+}
 }

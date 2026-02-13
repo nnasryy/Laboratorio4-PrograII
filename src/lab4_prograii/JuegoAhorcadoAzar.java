@@ -89,54 +89,18 @@ public class JuegoAhorcadoAzar extends JuegoAhorcadoBase{
             this.palabraActual=palabraActual+"_ ";
         }
     }
-
-    public String getPalabraSecreta() {
-        return palabraSecreta;
-    }
-
-    public String getPalabraActual() {
-        String resultado = "";
-        for (char c : palabraActual.toCharArray()) {
-            resultado += c + " ";
-        }
-        return resultado;
-    }
-
-    public int getIntentos() {
-        return intentos;
-    }
-
-    public String getLetrasUsadascomoTexto() {
-        String texto = "";
-        for (char c : letrasUsadas) {
-            texto += c + " ";
-        }
-        return texto;
-    }
-
-    public String getFiguraActual() {
-         int indice = limiteIntentos - intentos;
-        if (indice >= 0 && indice < figuraAhorcado.size()) {
-            return figuraAhorcado.get(indice);
-        }
-        return "";
-    }
     
     @Override
     public void jugar(char letra) {
-        try{
-            letra=Character.toLowerCase(letra);
-            if(!Character.isLetter(letra)){
-                throw new Exception("Favor ingresar una letra valida.");
-            }
-            if(verificarLetra(letra)){
-                JOptionPane.showMessageDialog(null, "Prediccion correcta");
-                actualizarPalabraActual(letra);
-            }
-        } catch (Exception e){
-            JOptionPane.showMessageDialog(null, e.getMessage(), "Error de entrada", JOptionPane.ERROR_MESSAGE);
+        letra = Character.toLowerCase(letra);
+
+        if (!Character.isLetter(letra)) {
+            return;
         }
-        
+
+        if (verificarLetra(letra)) {
+            actualizarPalabraActual(letra);
+        }
     }
     
     @Override
