@@ -30,4 +30,37 @@ public abstract class JuegoAhorcadoBase implements JuegoAhorcado{
     public abstract void actualizarPalabraActual(char letra);
     public abstract boolean verificarLetra(char letra);
     public abstract boolean hasGanado();
+    
+    public String getPalabraSecreta() {
+        return palabraSecreta;
+    }
+
+    public String getPalabraActual() {
+        String resultado = "";
+        for (char c : palabraActual.toCharArray()) {
+            resultado += c + " ";
+        }
+        return resultado;
+    }
+
+    public int getIntentos() {
+        return intentos;
+    }
+
+    public String getLetrasUsadascomoTexto() {
+        String texto = "";
+        for (char c : letrasUsadas) {
+            texto += c + " ";
+        }
+        return texto;
+    }
+
+    public String getFiguraActual() {
+         int indice = limiteIntentos - intentos;
+        if (indice >= 0 && indice < figuraAhorcado.size()) {
+            return figuraAhorcado.get(indice);
+        }
+        return "";
+    }
+   
 }
