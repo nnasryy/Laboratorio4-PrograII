@@ -1,107 +1,109 @@
 package GUI;
 
-import javax.swing.*;
 import java.awt.*;
+import javax.swing.*;
 import lab4_prograii.JuegoAhorcadoBase;
 
 public class PantallaJuego extends JFrame {
-
     private JuegoAhorcadoBase juego;
+    private JLabel lblPalabra, lblIntentos, lblLetrasUsadas;
+    private JTextArea areaAhorcado;
+    private JTextField txtEntrada;
+    private JButton btnAdivinar;
 
-    private JLabel lblPalabra;
-    private JLabel lblIntentos;
-    private JLabel lblFigura;
-    private JLabel lblUsadas;
-
-    private JTextField txtLetra;
-    private JButton btnProbar;
-
-    // ================= CONSTRUCTOR =================
-    public PantallaJuego(JuegoAhorcadoBase juego, String palabraInicial) {
+    public PantallaJuego(JuegoAhorcadoBase juego, String modo) {
         this.juego = juego;
-        juego.inicializarPalabraSecreta(palabraInicial);
-
-        setTitle("Juego del Ahorcado");
-        setSize(500, 500);
-        setLocationRelativeTo(null);
-        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        setLayout(null);
-
+        configurarVentana(modo);
         inicializarComponentes();
-        actualizarPantalla();
-
-        setVisible(true);
+        actualizarPantalla(); // Esto pone los "____" desde el segundo 1
     }
 
-    // ================= COMPONENTES =================
-    private void inicializarComponentes() {
+    private void configurarVentana(String modo) {
+        setTitle("Jugando - Modo " + modo);
+        setSize(500, 500);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setLayout(null);
+        getContentPane().setBackground(new Color(30, 30, 30));
+        setLocationRelativeTo(null);
+    }
 
-        lblPalabra = new JLabel();
-        lblPalabra.setFont(new Font("Arial", Font.BOLD, 26));
-        lblPalabra.setBounds(50, 40, 400, 40);
+    private void inicializarComponentes() {
+        // Figura del Ahorcado (ASCII)
+        areaAhorcado = new JTextArea();
+        areaAhorcado.setBounds(150, 20, 200, 150);
+        areaAhorcado.setEditable(false);
+        areaAhorcado.setBackground(new Color(30, 30, 30));
+        areaAhorcado.setForeground(Color.CYAN);
+        areaAhorcado.setFont(new Font("Monospaced", Font.BOLD, 16));
+        add(areaAhorcado);
+
+        // Palabra Secreta (Los guiones ____)
+        lblPalabra = new JLabel("", SwingConstants.CENTER);
+        lblPalabra.setBounds(50, 200, 400, 40);
+        lblPalabra.setFont(new Font("Monospaced", Font.BOLD, 30));
+        lblPalabra.setForeground(Color.WHITE);
         add(lblPalabra);
 
-        lblIntentos = new JLabel();
-        lblIntentos.setBounds(50, 90, 300, 25);
+        // Intentos restantes
+        lblIntentos = new JLabel("Intentos: 6");
+        lblIntentos.setBounds(50, 260, 200, 30);
+        lblIntentos.setForeground(new Color(231, 76, 60));
+        lblIntentos.setFont(new Font("Segoe UI", Font.BOLD, 18));
         add(lblIntentos);
 
-        lblFigura = new JLabel();
-        lblFigura.setFont(new Font("Monospaced", Font.BOLD, 22));
-        lblFigura.setBounds(50, 130, 200, 150);
-        add(lblFigura);
+        // Letras usadas
+        lblLetrasUsadas = new JLabel("Letras: ");
+        lblLetrasUsadas.setBounds(50, 300, 400, 30);
+        lblLetrasUsadas.setForeground(Color.LIGHT_GRAY);
+        add(lblLetrasUsadas);
 
-        lblUsadas = new JLabel();
-        lblUsadas.setBounds(50, 290, 400, 25);
-        add(lblUsadas);
+        // Entrada de texto
+        txtEntrada = new JTextField();
+        txtEntrada.setBounds(150, 350, 50, 40);
+        txtEntrada.setFont(new Font("Segoe UI", Font.BOLD, 20));
+        txtEntrada.setHorizontalAlignment(JTextField.CENTER);
+        add(txtEntrada);
 
-        txtLetra = new JTextField();
-        txtLetra.setBounds(50, 330, 50, 30);
-        add(txtLetra);
-
-        btnProbar = new JButton("Probar");
-        btnProbar.setBounds(120, 330, 100, 30);
-        add(btnProbar);
-
-        btnProbar.addActionListener(e -> procesarLetra());
+        // Botón Adivinar
+        btnAdivinar = new JButton("ADIVINAR");
+        btnAdivinar.setBounds(210, 350, 120, 40);
+        btnAdivinar.setBackground(new Color(41, 128, 185));
+        btnAdivinar.setForeground(Color.WHITE);
+        btnAdivinar.addActionListener(e -> procesarIntento());
+        add(btnAdivinar);
+        
+        // Permitir usar "Enter" para adivinar
+        getRootPane().setDefaultButton(btnAdivinar);
     }
 
-    // ================= LÓGICA GUI =================
-    private void procesarLetra() {
+    private void procesarIntento() {
+        String texto = txtEntrada.getText().trim().toUpperCase();
+        if (texto.isEmpty()) return;
 
-        String entrada = txtLetra.getText().toLowerCase();
-
-        if (entrada.isEmpty() || entrada.length() != 1 || !Character.isLetter(entrada.charAt(0))) {
-            JOptionPane.showMessageDialog(this, "Ingrese UNA letra válida.");
-            txtLetra.setText("");
-            return;
-        }
-
-        char letra = entrada.charAt(0);
-        juego.jugar(letra);
-        txtLetra.setText("");
-
+        char letra = texto.charAt(0);
+        juego.jugar(letra); // Llama a tu lógica de JuegoAhorcadoFijo/Azar
+        
         actualizarPantalla();
-        verificarEstado();
+        txtEntrada.setText("");
+        txtEntrada.requestFocus();
+
+        verificarEstadoJuego();
     }
 
     private void actualizarPantalla() {
-        lblPalabra.setText(juego.getPalabraActual());
-        lblIntentos.setText("Intentos restantes: " + juego.getIntentos());
-        lblFigura.setText("<html>" + juego.getFiguraActual().replace("\n", "<br>") + "</html>");
-        lblUsadas.setText("Letras usadas: " + juego.getLetrasUsadascomoTexto());
+        lblPalabra.setText(juego.getPalabraActual()); // Muestra _ _ _ _
+        lblIntentos.setText("Intentos: " + juego.getIntentos());
+        lblLetrasUsadas.setText("Letras usadas: " + juego.getLetrasUsadascomoTexto());
+        areaAhorcado.setText(juego.getFiguraActual());
     }
 
-    private void verificarEstado() {
-
+    private void verificarEstadoJuego() {
         if (juego.hasGanado()) {
-            JOptionPane.showMessageDialog(this, "¡Ganaste!");
-            dispose();
-        }
-
-        if (juego.getIntentos() == 0) {
-            JOptionPane.showMessageDialog(this,
-                    "Perdiste\nLa palabra era: " + juego.getPalabraSecreta());
-            dispose();
+            new ResultadoFinal(true, juego.getPalabraSecreta()).setVisible(true);
+            this.dispose();
+        } else if (juego.getIntentos() <= 0) {
+            new ResultadoFinal(false, juego.getPalabraSecreta()).setVisible(true);
+            this.dispose();
         }
     }
 }
