@@ -58,9 +58,9 @@ public class MenuModalidad extends JFrame {
         btnAzar.setBounds(215, 180, 150, 50);
         estilizarBoton(btnAzar, new Color(39, 174, 96));
         btnAzar.addActionListener(e -> {
-            String palabraAleatoria = adminPalabras.obtenerPalabraAzar();
+            String palabraAleatoria = adminPalabras.obtenerPalabraRandom();
             JuegoAhorcadoAzar juego = new JuegoAhorcadoAzar(palabraAleatoria);
-            abrirPantallaJuego(juego, "Azar");
+            abrirPantallaJuego(juego, palabraAleatoria);
         });
 
         // Salir

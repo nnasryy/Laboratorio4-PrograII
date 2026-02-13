@@ -49,4 +49,8 @@ public class AdminPalabrasSecretas {
         int indiceDePalabra = randomizar.nextInt(listaDePalabras.size());
         return listaDePalabras.get(indiceDePalabra);
     }
+
+    public String obtenerPalabraAzar() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }    
